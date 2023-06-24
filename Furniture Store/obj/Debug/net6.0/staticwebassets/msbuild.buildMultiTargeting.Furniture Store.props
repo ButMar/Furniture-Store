@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Furniture Store.props" />
-</Project>
