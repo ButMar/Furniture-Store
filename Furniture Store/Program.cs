@@ -1,4 +1,5 @@
 using Furniture_Store.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<FurnitureContext>(
+       options => options.UseSqlServer("name=ConnectionStrings:FurnitureDatabase"));
+
+builder.Services.AddDbContext<PriceContext>(
+       options => options.UseSqlServer("name=ConnectionStrings:PriceDatabase"));
 
 var app = builder.Build();
 

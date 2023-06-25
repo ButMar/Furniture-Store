@@ -12,7 +12,7 @@
     "Furniture_Store": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7252;http://localhost:5123",
+      "applicationUrl": "http://localhost:5123",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
