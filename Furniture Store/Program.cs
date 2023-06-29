@@ -11,8 +11,6 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<FurnitureContext>(
        options => options.UseSqlServer("name=ConnectionStrings:FurnitureDatabase"));
 
-builder.Services.AddDbContext<PriceContext>(
-       options => options.UseSqlServer("name=ConnectionStrings:PriceDatabase"));
 
 var app = builder.Build();
 

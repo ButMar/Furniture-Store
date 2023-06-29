@@ -1,4 +1,5 @@
 ﻿using Furniture_Store.Model;
+using Furniture_Store.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
@@ -11,10 +12,12 @@ namespace Furniture_Store.Controllers
     public class DetailController : ControllerBase
     {
         private readonly FurnitureContext db;
+        private PriceClient priceClient;
 
         public DetailController(FurnitureContext context)
         {
             db = context;
+            priceClient = new PriceClient();
         }
 
         //[HttpGet(Name = "GETAllDetail")]
@@ -29,12 +32,21 @@ namespace Furniture_Store.Controllers
 
 
         [HttpGet(Name = "GETDetail")]
-        public List<Detail> GETspecialDetail(string color)
+        public List<DetailResponse> GETspecialDetail(string color)
         {
             List<Detail> resultDBdetail = db.Details.Where(x => x.Color == color).ToList();
+            List<DetailResponse> responses = new List<DetailResponse>();
 
-            return resultDBdetail;
+            foreach (Detail detail in resultDBdetail)
+            {
+                var response = new DetailResponse(detail);
+                response.Price = priceClient.GetPriceAsync("https://localhost:7258/Price?price_id="+ detail.DatailId).Result.Price1;
+                response.Price += 1000;
+                responses.Add(response);
 
+            }
+
+            return responses;
         }
 
 

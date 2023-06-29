@@ -21,7 +21,7 @@ public partial class FurnitureContext : DbContext
 
     public virtual DbSet<KitchensTemplate> KitchensTemplates { get; set; }
 
-    public virtual DbSet<Price> Prices { get; set; }
+   // public virtual DbSet<Price> Prices { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -81,21 +81,7 @@ public partial class FurnitureContext : DbContext
                 .HasColumnName("kitchenType");
         });
 
-        modelBuilder.Entity<Price>(entity =>
-        {
-            entity.ToTable("Price");
 
-            entity.Property(e => e.PriceId)
-                .ValueGeneratedNever()
-                .HasColumnName("price_id");
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsFixedLength()
-                .HasColumnName("name");
-            entity.Property(e => e.Price1).HasColumnName("price1");
-            entity.Property(e => e.Price100).HasColumnName("price100");
-            entity.Property(e => e.Price20).HasColumnName("price20");
-        });
 
         OnModelCreatingPartial(modelBuilder);
     }

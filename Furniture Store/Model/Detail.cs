@@ -16,4 +16,5 @@ public partial class Detail
     public string Color { get; set; } = null!;
 
     public int? Count { get; set; }
+
 }
