@@ -37,10 +37,14 @@ namespace Furniture_Store.Controllers
             List<Detail> resultDBdetail = db.Details.Where(x => x.Color == color).ToList();
             List<DetailResponse> responses = new List<DetailResponse>();
 
+            Dictionary<int, int> conformityID = new Dictionary<int, int>();
+            conformityID = db.ConformityIds.ToDictionary(d => d.FsdetailId, d => d.PdetailId);
+            
+
             foreach (Detail detail in resultDBdetail)
             {
-                var response = new DetailResponse(detail);
-                response.Price = priceClient.GetPriceAsync("https://localhost:7258/Price?price_id="+ detail.DatailId).Result.Price1;
+                DetailResponse response = new DetailResponse(detail);
+                response.Price = priceClient.GetPriceAsync("https://localhost:7258/Price?price_id="+ conformityID[detail.DatailId]).Result.Price1;
                 response.Price += 1000;
                 responses.Add(response);
             }
