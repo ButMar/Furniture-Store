@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Furniture_Store.Model;
+namespace Furniture_Store;
 
 public partial class KitchensTemplate
 {

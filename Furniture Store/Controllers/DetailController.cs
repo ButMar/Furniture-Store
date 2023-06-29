@@ -43,7 +43,6 @@ namespace Furniture_Store.Controllers
                 response.Price = priceClient.GetPriceAsync("https://localhost:7258/Price?price_id="+ detail.DatailId).Result.Price1;
                 response.Price += 1000;
                 responses.Add(response);
-
             }
 
             return responses;

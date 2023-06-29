@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Furniture_Store.Model;
+namespace Furniture_Store;
 
 public partial class Detail
 {
@@ -16,5 +16,4 @@ public partial class Detail
     public string Color { get; set; } = null!;
 
     public int? Count { get; set; }
-
 }
