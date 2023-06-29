@@ -40,12 +40,19 @@ namespace Furniture_Store.Controllers
             Dictionary<int, int> conformityID = new Dictionary<int, int>();
             conformityID = db.ConformityIds.ToDictionary(d => d.FsdetailId, d => d.PdetailId);
             
-
             foreach (Detail detail in resultDBdetail)
             {
                 DetailResponse response = new DetailResponse(detail);
-                response.Price = priceClient.GetPriceAsync("https://localhost:7258/Price?price_id="+ conformityID[detail.DatailId]).Result.Price1;
-                response.Price += 1000;
+                try
+                {
+                    response.Price = priceClient.GetPriceAsync("https://localhost:7258/Price?price_id=" + conformityID[detail.DatailId]).Result.Price1;
+
+                    response.Price += 1000;
+                }
+                catch (AggregateException exeption)
+                {
+                    response.Price = 0;
+                }
                 responses.Add(response);
             }
 
